@@ -8,6 +8,7 @@ use Genkgo\Camt\Camt054\Decoder\Message as BaseMessage;
 use Genkgo\Camt\Camt054\DTO\V04 as Camt054V04DTO;
 use Genkgo\Camt\Decoder\Factory\DTO as DTOFactory;
 use Genkgo\Camt\DTO;
+use Genkgo\Camt\Util\XmlBoolean;
 use SimpleXMLElement;
 
 class Message extends BaseMessage
@@ -54,7 +55,7 @@ class Message extends BaseMessage
         if (isset($xmlGroupHeader->MsgPgntn)) {
             $groupHeader->setPagination(new DTO\Pagination(
                 (string) $xmlGroupHeader->MsgPgntn->PgNb,
-                ('true' === (string) $xmlGroupHeader->MsgPgntn->LastPgInd) ? true : false
+                XmlBoolean::parse($xmlGroupHeader->MsgPgntn->LastPgInd)
             ));
         }
 

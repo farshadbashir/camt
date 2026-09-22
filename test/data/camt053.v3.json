@@ -42,6 +42,7 @@
                 "__CLASS__": "Genkgo\\Camt\\Camt053\\DTO\\Statement",
                 "getAccount": {
                     "__CLASS__": "Genkgo\\Camt\\DTO\\OtherAccount",
+                    "getCurrencyCode": "EUR",
                     "getIdentification": "NL26VAYB8060476890",
                     "getIssuer": null,
                     "getSchemeName": null
@@ -205,6 +206,7 @@
                         "__CLASS__": "Genkgo\\Camt\\DTO\\RelatedParty",
                         "getAccount": {
                             "__CLASS__": "Genkgo\\Camt\\DTO\\IbanAccount",
+                            "getCurrencyCode": null,
                             "getIban": {
                                 "__CLASS__": "Genkgo\\Camt\\Iban",
                                 "getIban": "NL56AGDH9619008421"
@@ -250,6 +252,7 @@
                         "__CLASS__": "Genkgo\\Camt\\DTO\\RelatedParty",
                         "getAccount": {
                             "__CLASS__": "Genkgo\\Camt\\DTO\\IbanAccount",
+                            "getCurrencyCode": null,
                             "getIban": {
                                 "__CLASS__": "Genkgo\\Camt\\Iban",
                                 "getIban": "NL56AGDH9619008421"

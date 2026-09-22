@@ -6,6 +6,7 @@ namespace Genkgo\Camt\Decoder;
 
 use Genkgo\Camt\Decoder\Factory\DTO as DTOFactory;
 use Genkgo\Camt\DTO;
+use Genkgo\Camt\Util\XmlBoolean;
 use SimpleXMLElement;
 
 abstract class Message
@@ -44,7 +45,7 @@ abstract class Message
         if (isset($xmlGroupHeader->MsgPgntn)) {
             $groupHeader->setPagination(new DTO\Pagination(
                 (string) $xmlGroupHeader->MsgPgntn->PgNb,
-                ('true' === (string) $xmlGroupHeader->MsgPgntn->LastPgInd) ? true : false
+                XmlBoolean::parse($xmlGroupHeader->MsgPgntn->LastPgInd)
             ));
         }
 
@@ -53,6 +54,10 @@ abstract class Message
 
     public function addCommonRecordInformation(DTO\Record $record, SimpleXMLElement $xmlRecord): void
     {
+        if (isset($xmlRecord->Acct->Ccy)) {
+            $record->getAccount()->setCurrencyCode((string) $xmlRecord->Acct->Ccy);
+        }
+
         if (isset($xmlRecord->ElctrncSeqNb)) {
             $record->setElectronicSequenceNumber((string) $xmlRecord->ElctrncSeqNb);
         }

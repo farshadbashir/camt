@@ -6,14 +6,13 @@ namespace Genkgo\TestCamt\Util;
 
 use Genkgo\Camt\Util\MoneyFactory;
 use Money\Money;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use SimpleXMLElement;
 
 class MoneyFactoryTest extends TestCase
 {
-    /**
-     * @dataProvider providerCreate
-     */
+    #[DataProvider('providerCreate')]
     public function testCreate(string $amount, ?string $CdtDbtInd, Money $expected): void
     {
         $factory = new MoneyFactory();

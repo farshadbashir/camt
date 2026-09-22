@@ -21,11 +21,21 @@ class Reader
 
     public function readDom(DOMDocument $document): Message
     {
+        $this->messageFormat = null;
+
         if ($document->documentElement === null) {
             throw new ReaderException('Empty document');
         }
 
-        $xmlNs = $document->documentElement->getAttribute('xmlns');
+        if ($document->doctype !== null) {
+            throw new ReaderException('Document type declarations are not allowed');
+        }
+
+        if ($document->getElementsByTagNameNS('http://www.w3.org/2001/XInclude', '*')->length !== 0) {
+            throw new ReaderException('XInclude is not allowed');
+        }
+
+        $xmlNs = $document->documentElement->namespaceURI ?? '';
         $this->messageFormat = $this->getMessageFormatForXmlNs($xmlNs);
 
         return $this->messageFormat->getDecoder()->decode($document, $this->config->getXsdValidation());
@@ -33,8 +43,22 @@ class Reader
 
     public function readString(string $string): Message
     {
+        $this->messageFormat = null;
         $dom = new DOMDocument('1.0', 'UTF-8');
-        $dom->loadXML($string);
+        $previous = libxml_use_internal_errors(true);
+        try {
+            libxml_clear_errors();
+            $options = LIBXML_NONET;
+            if (defined('LIBXML_NO_XXE')) {
+                $options |= LIBXML_NO_XXE;
+            }
+            if ($string === '' || !$dom->loadXML($string, $options)) {
+                throw new ReaderException('Provided XML could not be parsed');
+            }
+        } finally {
+            libxml_clear_errors();
+            libxml_use_internal_errors($previous);
+        }
 
         return $this->readDom($dom);
     }
@@ -62,7 +86,7 @@ class Reader
             }
         }
 
-        throw new ReaderException("Unsupported format, cannot find message format with xmlns {$xmlNs}");
+        throw new ReaderException('Unsupported document namespace');
     }
 
     public function getMessageFormat(): ?MessageFormatInterface

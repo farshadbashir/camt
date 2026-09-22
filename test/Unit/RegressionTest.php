@@ -6,6 +6,7 @@ namespace Genkgo\TestCamt\Unit;
 
 use Genkgo\Camt\Config;
 use Genkgo\Camt\Reader;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class RegressionTest extends TestCase
@@ -23,9 +24,7 @@ class RegressionTest extends TestCase
         date_default_timezone_set($this->timezone);
     }
 
-    /**
-     * @dataProvider providerRegression
-     */
+    #[DataProvider('providerRegression')]
     public function testRegression(string $file, string $expectedFile): void
     {
         $reader = new Reader(Config::getDefault());

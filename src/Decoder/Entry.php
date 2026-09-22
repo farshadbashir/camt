@@ -18,12 +18,11 @@ class Entry
 
     public function addTransactionDetails(DTO\Entry $entry, SimpleXMLElement $xmlEntry): void
     {
-        $xmlDetails = $xmlEntry->NtryDtls->TxDtls;
-
-        if ($xmlDetails !== null) {
-            foreach ($xmlDetails as $xmlDetail) {
+        foreach ($xmlEntry->NtryDtls as $xmlGroup) {
+            foreach ($xmlGroup->TxDtls as $xmlDetail) {
+                $direction = isset($xmlDetail->CdtDbtInd) ? $xmlDetail->CdtDbtInd : $xmlEntry->CdtDbtInd;
                 $detail = new DTO\EntryTransactionDetail();
-                $this->entryTransactionDetailDecoder->addCreditDebitIdentifier($detail, $xmlEntry->CdtDbtInd);
+                $this->entryTransactionDetailDecoder->addCreditDebitIdentifier($detail, $direction);
                 $this->entryTransactionDetailDecoder->addReference($detail, $xmlDetail);
                 $this->entryTransactionDetailDecoder->addRelatedParties($detail, $xmlDetail);
                 $this->entryTransactionDetailDecoder->addRelatedAgents($detail, $xmlDetail);
@@ -33,8 +32,8 @@ class Entry
                 $this->entryTransactionDetailDecoder->addAdditionalTransactionInformation($detail, $xmlDetail);
                 $this->entryTransactionDetailDecoder->addBankTransactionCode($detail, $xmlDetail);
                 $this->entryTransactionDetailDecoder->addCharges($detail, $xmlDetail);
-                $this->entryTransactionDetailDecoder->addAmountDetails($detail, $xmlDetail, $xmlEntry->CdtDbtInd);
-                $this->entryTransactionDetailDecoder->addAmount($detail, $xmlDetail, $xmlEntry->CdtDbtInd);
+                $this->entryTransactionDetailDecoder->addAmountDetails($detail, $xmlDetail, $direction);
+                $this->entryTransactionDetailDecoder->addAmount($detail, $xmlDetail, $direction);
 
                 $entry->addTransactionDetail($detail);
             }

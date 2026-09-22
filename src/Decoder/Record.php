@@ -8,6 +8,7 @@ use DateTimeImmutable;
 use Genkgo\Camt\DTO;
 use Genkgo\Camt\DTO\RecordWithBalances;
 use Genkgo\Camt\Util\MoneyFactory;
+use Genkgo\Camt\Util\XmlBoolean;
 use SimpleXMLElement;
 
 class Record
@@ -138,8 +139,8 @@ class Record
 
             $entry->setAdditionalInfo($additionalInfo);
 
-            if (isset($xmlEntry->RvslInd) && (string) $xmlEntry->RvslInd === 'true') {
-                $entry->setReversalIndicator(true);
+            if (isset($xmlEntry->RvslInd)) {
+                $entry->setReversalIndicator(XmlBoolean::parse($xmlEntry->RvslInd));
             }
 
             if (isset($xmlEntry->NtryRef) && (string) $xmlEntry->NtryRef) {
@@ -215,8 +216,8 @@ class Record
 
                             $chargesDetail->setAmount($money);
                         }
-                        if (isset($chargesRecord->CdtDbtInd) && (string) $chargesRecord->CdtDbtInd === 'true') {
-                            $chargesDetail->setChargesIncludedIndicator(true);
+                        if (isset($chargesRecord->ChrgInclInd)) {
+                            $chargesDetail->setChargesIncludedIndicator(XmlBoolean::parse($chargesRecord->ChrgInclInd));
                         }
                         if (isset($chargesRecord->Tp->Prtry->Id) && (string) $chargesRecord->Tp->Prtry->Id) {
                             $chargesDetail->setIdentification((string) $chargesRecord->Tp->Prtry->Id);

@@ -28,20 +28,17 @@ class Decoder implements DecoderInterface
 
     private function validate(DOMDocument $document): void
     {
-        libxml_use_internal_errors(true);
-        $valid = $document->schemaValidate(dirname(__DIR__) . $this->schemeDefinitionPath);
-        $errors = libxml_get_errors();
-        libxml_clear_errors();
-
-        if (!$valid) {
-            $messages = [];
-            foreach ($errors as $error) {
-                $messages[] = $error->message;
+        $previous = libxml_use_internal_errors(true);
+        try {
+            libxml_clear_errors();
+            $valid = $document->schemaValidate(dirname(__DIR__) . $this->schemeDefinitionPath);
+            if (!$valid) {
+                // Schema diagnostics can contain private values from the bank file.
+                throw new InvalidMessageException('Provided XML is not valid according to the XSD');
             }
-
-            $errorMessage = implode("\n", $messages);
-
-            throw new InvalidMessageException("Provided XML is not valid according to the XSD:\n{$errorMessage}");
+        } finally {
+            libxml_clear_errors();
+            libxml_use_internal_errors($previous);
         }
     }
 
@@ -51,12 +48,14 @@ class Decoder implements DecoderInterface
             $this->validate($document);
         }
 
+        $namespace = $document->documentElement?->namespaceURI ?? '';
         $document = simplexml_import_dom($document);
-        if (!$document) {
+        if ($document === false) {
             throw new InvalidMessageException('Provided XML could not be parsed');
         }
 
-        $this->document = $document;
+        // Select by URI so equivalent namespace prefixes keep identical meaning.
+        $this->document = $document->children($namespace);
 
         $message = new Message();
         $this->messageDecoder->addGroupHeader($message, $this->document);

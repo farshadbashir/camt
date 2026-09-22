@@ -68,6 +68,7 @@
                 "__CLASS__": "Genkgo\\Camt\\Camt052\\DTO\\Report",
                 "getAccount": {
                     "__CLASS__": "Genkgo\\Camt\\DTO\\IbanAccount",
+                    "getCurrencyCode": null,
                     "getIban": {
                         "__CLASS__": "Genkgo\\Camt\\Iban",
                         "getIban": "CH2801234000123456789"
@@ -184,7 +185,7 @@
                         }
                     }
                 },
-                "getCreditDebitIndicator": "DBIT",
+                "getCreditDebitIndicator": "CRDT",
                 "getReference": {
                     "__CLASS__": "Genkgo\\Camt\\DTO\\Reference",
                     "getAccountOwnerTransactionId": null,
@@ -228,6 +229,7 @@
                         "__CLASS__": "Genkgo\\Camt\\DTO\\RelatedParty",
                         "getAccount": {
                             "__CLASS__": "Genkgo\\Camt\\DTO\\IbanAccount",
+                            "getCurrencyCode": null,
                             "getIban": {
                                 "__CLASS__": "Genkgo\\Camt\\Iban",
                                 "getIban": "CH2801234000123456789"
@@ -246,6 +248,7 @@
                         "__CLASS__": "Genkgo\\Camt\\DTO\\RelatedParty",
                         "getAccount": {
                             "__CLASS__": "Genkgo\\Camt\\DTO\\IbanAccount",
+                            "getCurrencyCode": null,
                             "getIban": {
                                 "__CLASS__": "Genkgo\\Camt\\Iban",
                                 "getIban": "CH2401234004141414141"

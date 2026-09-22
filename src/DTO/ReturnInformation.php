@@ -6,26 +6,27 @@ namespace Genkgo\Camt\DTO;
 
 class ReturnInformation
 {
-    private string $code;
+    /** @param list<string> $additionalInformation */
+    public function __construct(
+        private ?string $code,
+        private ?string $proprietary,
+        private array $additionalInformation,
+    ) {
+    }
 
-    private string $additionalInformation;
-
-    public function getCode(): string
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function getAdditionalInformation(): string
+    public function getProprietary(): ?string
     {
-        return $this->additionalInformation;
+        return $this->proprietary;
     }
 
-    public static function fromUnstructured(string $code, string $additionalInformation): self
+    /** @return list<string> */
+    public function getAdditionalInformation(): array
     {
-        $information = new self();
-        $information->code = $code;
-        $information->additionalInformation = $additionalInformation;
-
-        return $information;
+        return $this->additionalInformation;
     }
 }

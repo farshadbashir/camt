@@ -42,6 +42,7 @@
                 "__CLASS__": "Genkgo\\Camt\\Camt052\\DTO\\Report",
                 "getAccount": {
                     "__CLASS__": "Genkgo\\Camt\\DTO\\OtherAccount",
+                    "getCurrencyCode": null,
                     "getIdentification": "CH2801234000123456789",
                     "getIssuer": null,
                     "getSchemeName": null
@@ -114,6 +115,7 @@
                         "__CLASS__": "Genkgo\\Camt\\DTO\\RelatedParty",
                         "getAccount": {
                             "__CLASS__": "Genkgo\\Camt\\DTO\\OtherAccount",
+                            "getCurrencyCode": null,
                             "getIdentification": "0000000000",
                             "getIssuer": null,
                             "getSchemeName": null
@@ -156,6 +158,7 @@
                         "__CLASS__": "Genkgo\\Camt\\DTO\\RelatedParty",
                         "getAccount": {
                             "__CLASS__": "Genkgo\\Camt\\DTO\\OtherAccount",
+                            "getCurrencyCode": null,
                             "getIdentification": "1111111111",
                             "getIssuer": null,
                             "getSchemeName": null

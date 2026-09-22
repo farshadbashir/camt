@@ -38,6 +38,7 @@
                 "__CLASS__": "Genkgo\\Camt\\Camt054\\DTO\\Notification",
                 "getAccount": {
                     "__CLASS__": "Genkgo\\Camt\\DTO\\OtherAccount",
+                    "getCurrencyCode": null,
                     "getIdentification": "CH2801234000123456789",
                     "getIssuer": null,
                     "getSchemeName": null

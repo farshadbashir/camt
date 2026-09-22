@@ -35,6 +35,7 @@
                 "__CLASS__": "Genkgo\\Camt\\Camt054\\DTO\\Notification",
                 "getAccount": {
                     "__CLASS__": "Genkgo\\Camt\\DTO\\IbanAccount",
+                    "getCurrencyCode": null,
                     "getIban": {
                         "__CLASS__": "Genkgo\\Camt\\Iban",
                         "getIban": "CH2801234000123456789"
@@ -82,6 +83,7 @@
                         "__CLASS__": "Genkgo\\Camt\\DTO\\RelatedParty",
                         "getAccount": {
                             "__CLASS__": "Genkgo\\Camt\\DTO\\IbanAccount",
+                            "getCurrencyCode": null,
                             "getIban": {
                                 "__CLASS__": "Genkgo\\Camt\\Iban",
                                 "getIban": "CH2801234000123456789"

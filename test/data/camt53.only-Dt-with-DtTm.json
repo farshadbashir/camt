@@ -17,6 +17,7 @@
             "__CLASS__": "Genkgo\\Camt\\Camt053\\DTO\\Statement",
             "getAccount": {
                 "__CLASS__": "Genkgo\\Camt\\DTO\\IbanAccount",
+                "getCurrencyCode": null,
                 "getIban": {
                     "__CLASS__": "Genkgo\\Camt\\Iban",
                     "getIban": "GB33BUKB20201555555555"

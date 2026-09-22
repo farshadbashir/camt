@@ -42,6 +42,7 @@
                 "__CLASS__": "Genkgo\\Camt\\Camt052\\DTO\\Report",
                 "getAccount": {
                     "__CLASS__": "Genkgo\\Camt\\DTO\\IbanAccount",
+                    "getCurrencyCode": null,
                     "getIban": {
                         "__CLASS__": "Genkgo\\Camt\\Iban",
                         "getIban": "CH2801234000123456789"
@@ -100,7 +101,7 @@
                 "getAdditionalTransactionInformation": null,
                 "getAmount": {
                     "__CLASS__": "Money\\Money",
-                    "getAmount": "-410",
+                    "getAmount": "410",
                     "getCurrency": {
                         "__CLASS__": "Money\\Currency",
                         "getCode": "USD"
@@ -108,7 +109,7 @@
                 },
                 "getAmountDetails": {
                     "__CLASS__": "Money\\Money",
-                    "getAmount": "-379",
+                    "getAmount": "379",
                     "getCurrency": {
                         "__CLASS__": "Money\\Currency",
                         "getCode": "CHF"
@@ -158,7 +159,7 @@
                         }
                     }
                 },
-                "getCreditDebitIndicator": "DBIT",
+                "getCreditDebitIndicator": "CRDT",
                 "getReference": {
                     "__CLASS__": "Genkgo\\Camt\\DTO\\Reference",
                     "getAccountOwnerTransactionId": null,
@@ -202,6 +203,7 @@
                         "__CLASS__": "Genkgo\\Camt\\DTO\\RelatedParty",
                         "getAccount": {
                             "__CLASS__": "Genkgo\\Camt\\DTO\\IbanAccount",
+                            "getCurrencyCode": null,
                             "getIban": {
                                 "__CLASS__": "Genkgo\\Camt\\Iban",
                                 "getIban": "CH2801234000123456789"
@@ -220,6 +222,7 @@
                         "__CLASS__": "Genkgo\\Camt\\DTO\\RelatedParty",
                         "getAccount": {
                             "__CLASS__": "Genkgo\\Camt\\DTO\\IbanAccount",
+                            "getCurrencyCode": null,
                             "getIban": {
                                 "__CLASS__": "Genkgo\\Camt\\Iban",
                                 "getIban": "CH2401234004141414141"

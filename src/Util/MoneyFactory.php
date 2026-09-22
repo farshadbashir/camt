@@ -21,18 +21,19 @@ final class MoneyFactory
 
     public function create(SimpleXMLElement $xmlAmount, ?SimpleXMLElement $CdtDbtInd): Money
     {
-        $amount = (string) $xmlAmount;
-
-        if ((string) $CdtDbtInd === 'DBIT') {
-            $amount = (string) ((float) $amount * -1);
+        $amount = trim((string) $xmlAmount, " \t\r\n");
+        if (str_starts_with($amount, '+')) {
+            $amount = substr($amount, 1);
         }
 
         /** @psalm-var non-empty-string $currency */
-        $currency = (string) $xmlAmount['Ccy'];
+        $currency = (string) $xmlAmount->attributes()->Ccy;
 
-        return $this->decimalMoneyParser->parse(
+        $money = $this->decimalMoneyParser->parse(
             $amount,
             new Currency($currency)
         );
+
+        return (string) $CdtDbtInd === 'DBIT' ? $money->negative() : $money;
     }
 }

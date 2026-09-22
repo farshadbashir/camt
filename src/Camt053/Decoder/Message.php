@@ -8,6 +8,7 @@ use Genkgo\Camt\Camt053\DTO as Camt053DTO;
 use Genkgo\Camt\Decoder\Message as BaseMessageDecoder;
 use Genkgo\Camt\DTO;
 use Genkgo\Camt\Iban;
+use Genkgo\Camt\Util\XmlBoolean;
 use SimpleXMLElement;
 
 class Message extends BaseMessageDecoder
@@ -20,14 +21,14 @@ class Message extends BaseMessageDecoder
         foreach ($xmlStatements as $xmlStatement) {
             $statement = new Camt053DTO\Statement(
                 (string) $xmlStatement->Id,
-                $this->dateDecoder->decode((string) $xmlStatement->CreDtTm),
+                isset($xmlStatement->CreDtTm) ? $this->dateDecoder->decode((string) $xmlStatement->CreDtTm) : null,
                 $this->getAccount($xmlStatement)
             );
 
             if (isset($xmlStatement->StmtPgntn)) {
                 $statement->setPagination(new DTO\Pagination(
                     (string) $xmlStatement->StmtPgntn->PgNb,
-                    ('true' === (string) $xmlStatement->StmtPgntn->LastPgInd) ? true : false
+                    XmlBoolean::parse($xmlStatement->StmtPgntn->LastPgInd)
                 ));
             }
 

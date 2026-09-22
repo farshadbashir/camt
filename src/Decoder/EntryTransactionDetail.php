@@ -9,6 +9,7 @@ use Genkgo\Camt\DTO;
 use Genkgo\Camt\DTO\RelatedParty;
 use Genkgo\Camt\DTO\RelatedPartyTypeInterface;
 use Genkgo\Camt\Util\MoneyFactory;
+use Genkgo\Camt\Util\XmlBoolean;
 use SimpleXMLElement;
 
 abstract class EntryTransactionDetail
@@ -255,12 +256,17 @@ abstract class EntryTransactionDetail
 
     public function addReturnInformation(DTO\EntryTransactionDetail $detail, SimpleXMLElement $xmlDetail): void
     {
-        if (isset($xmlDetail->RtrInf, $xmlDetail->RtrInf->Rsn->Cd)) {
-            $remittanceInformation = DTO\ReturnInformation::fromUnstructured(
-                (string) $xmlDetail->RtrInf->Rsn->Cd,
-                (string) $xmlDetail->RtrInf->AddtlInf
-            );
-            $detail->setReturnInformation($remittanceInformation);
+        if (isset($xmlDetail->RtrInf)) {
+            $xmlReturn = $xmlDetail->RtrInf;
+            $additional = [];
+            foreach ($xmlReturn->AddtlInf as $information) {
+                $additional[] = (string) $information;
+            }
+            $detail->setReturnInformation(new DTO\ReturnInformation(
+                isset($xmlReturn->Rsn->Cd) ? (string) $xmlReturn->Rsn->Cd : null,
+                isset($xmlReturn->Rsn->Prtry) ? (string) $xmlReturn->Rsn->Prtry : null,
+                $additional,
+            ));
         }
     }
 
@@ -332,8 +338,8 @@ abstract class EntryTransactionDetail
                         $money = $this->moneyFactory->create($chargesRecord->Amt, $chargesRecord->CdtDbtInd);
                         $chargesDetail->setAmount($money);
                     }
-                    if (isset($chargesRecord->CdtDbtInd) && (string) $chargesRecord->CdtDbtInd === 'true') {
-                        $chargesDetail->setChargesIncludedIndicator(true);
+                    if (isset($chargesRecord->ChrgInclInd)) {
+                        $chargesDetail->setChargesIncludedIndicator(XmlBoolean::parse($chargesRecord->ChrgInclInd));
                     }
                     if (isset($chargesRecord->Tp->Prtry->Id) && (string) $chargesRecord->Tp->Prtry->Id) {
                         $chargesDetail->setIdentification((string) $chargesRecord->Tp->Prtry->Id);

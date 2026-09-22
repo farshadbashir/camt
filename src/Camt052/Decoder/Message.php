@@ -10,6 +10,7 @@ use Genkgo\Camt\DTO;
 use Genkgo\Camt\DTO\Account;
 use Genkgo\Camt\Exception\InvalidMessageException;
 use Genkgo\Camt\Iban;
+use Genkgo\Camt\Util\XmlBoolean;
 use SimpleXMLElement;
 
 abstract class Message extends BaseMessageDecoder
@@ -29,7 +30,7 @@ abstract class Message extends BaseMessageDecoder
             if (isset($xmlReport->RptPgntn)) {
                 $report->setPagination(new DTO\Pagination(
                     (string) $xmlReport->RptPgntn->PgNb,
-                    ('true' === (string) $xmlReport->RptPgntn->LastPgInd) ? true : false
+                    XmlBoolean::parse($xmlReport->RptPgntn->LastPgInd)
                 ));
             }
 
