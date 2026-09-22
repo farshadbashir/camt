@@ -18,7 +18,7 @@
                 "getDomain": null,
                 "getProprietary": null
             },
-            "getBatchPaymentId": null,
+            "getBatches": [],
             "getBookingDate": null,
             "getCharges": null,
             "getCreditDebitIndicator": "DBIT",
@@ -55,6 +55,7 @@
             "getReference": null,
             "getReversalIndicator": false,
             "getStatus": "BOOK",
+            "getStatusType": "code",
             "getTransactionDetail": {
                 "__CLASS__": "Genkgo\\Camt\\DTO\\EntryTransactionDetail",
                 "getAdditionalTransactionInformation": null,
@@ -67,6 +68,7 @@
                 },
                 "getCharges": null,
                 "getCreditDebitIndicator": "DBIT",
+                "getGroupIndex": 0,
                 "getReference": null,
                 "getRelatedAgent": null,
                 "getRelatedAgents": [],

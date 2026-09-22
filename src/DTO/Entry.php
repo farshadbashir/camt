@@ -30,7 +30,8 @@ class Entry
 
     private int $index;
 
-    private ?string $batchPaymentId = null;
+    /** @var Batch[] */
+    private array $batches = [];
 
     private ?string $additionalInfo = null;
 
@@ -39,6 +40,8 @@ class Entry
     private ?Charges $charges = null;
 
     private ?string $status = null;
+
+    private ?string $statusType = null;
 
     private ?string $creditDebitIndicator = null;
 
@@ -129,14 +132,15 @@ class Entry
         return $this->index;
     }
 
-    public function setBatchPaymentId(?string $batchPaymentId): void
+    public function addBatch(Batch $batch): void
     {
-        $this->batchPaymentId = trim((string) $batchPaymentId);
+        $this->batches[] = $batch;
     }
 
-    public function getBatchPaymentId(): ?string
+    /** @return Batch[] */
+    public function getBatches(): array
     {
-        return $this->batchPaymentId;
+        return $this->batches;
     }
 
     public function getAdditionalInfo(): ?string
@@ -187,6 +191,16 @@ class Entry
     public function setStatus(?string $status): void
     {
         $this->status = $status;
+    }
+
+    public function getStatusType(): ?string
+    {
+        return $this->statusType;
+    }
+
+    public function setStatusType(?string $statusType): void
+    {
+        $this->statusType = $statusType;
     }
 
     public function getCreditDebitIndicator(): ?string

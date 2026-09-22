@@ -22,7 +22,7 @@
                     "getIssuer": ""
                 }
             },
-            "getBatchPaymentId": null,
+            "getBatches": [],
             "getBookingDate": {
                 "__CLASS__": "DateTimeImmutable",
                 "0": "2014-12-31T00:00:00+00:00"
@@ -95,6 +95,7 @@
             "getReference": null,
             "getReversalIndicator": false,
             "getStatus": "BOOK",
+            "getStatusType": "code",
             "getTransactionDetail": {
                 "__CLASS__": "Genkgo\\Camt\\DTO\\EntryTransactionDetail",
                 "getAdditionalTransactionInformation": null,
@@ -111,6 +112,7 @@
                 },
                 "getCharges": null,
                 "getCreditDebitIndicator": "CRDT",
+                "getGroupIndex": 0,
                 "getReference": {
                     "__CLASS__": "Genkgo\\Camt\\DTO\\Reference",
                     "getAccountOwnerTransactionId": null,

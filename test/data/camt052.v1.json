@@ -26,7 +26,7 @@
                 },
                 "getProprietary": null
             },
-            "getBatchPaymentId": null,
+            "getBatches": [],
             "getBookingDate": {
                 "__CLASS__": "DateTimeImmutable",
                 "0": "2007-10-18T09:15:00+00:00"
@@ -68,6 +68,7 @@
             "getReference": null,
             "getReversalIndicator": false,
             "getStatus": "BOOK",
+            "getStatusType": "code",
             "getTransactionDetail": null,
             "getTransactionDetails": [],
             "getValueDate": {

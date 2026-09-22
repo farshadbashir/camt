@@ -333,6 +333,7 @@ abstract class EntryTransactionDetail
                 /** @var SimpleXMLElement $chargesRecord */
                 foreach ($chargesRecords as $chargesRecord) {
                     $chargesDetail = new DTO\ChargesRecord();
+                    $chargesDetail->setCreditDebitIndicator(isset($chargesRecord->CdtDbtInd) ? (string) $chargesRecord->CdtDbtInd : null);
 
                     if (isset($chargesRecord->Amt)) {
                         $money = $this->moneyFactory->create($chargesRecord->Amt, $chargesRecord->CdtDbtInd);

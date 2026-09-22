@@ -10,9 +10,11 @@ class ChargesRecord
 {
     private Money $amount;
 
-    private bool $chargesIncludedIndicator = false;
+    private ?bool $chargesIncludedIndicator = null;
 
-    private string $identification;
+    private ?string $identification = null;
+
+    private ?string $creditDebitIndicator = null;
 
     public function getAmount(): Money
     {
@@ -24,7 +26,7 @@ class ChargesRecord
         $this->amount = $money;
     }
 
-    public function getChargesIncludedIndicator(): bool
+    public function getChargesIncludedIndicator(): ?bool
     {
         return $this->chargesIncludedIndicator;
     }
@@ -34,7 +36,7 @@ class ChargesRecord
         $this->chargesIncludedIndicator = $chargesIncludedIndicator;
     }
 
-    public function getIdentification(): string
+    public function getIdentification(): ?string
     {
         return $this->identification;
     }
@@ -42,5 +44,15 @@ class ChargesRecord
     public function setIdentification(string $identification): void
     {
         $this->identification = $identification;
+    }
+
+    public function getCreditDebitIndicator(): ?string
+    {
+        return $this->creditDebitIndicator;
+    }
+
+    public function setCreditDebitIndicator(?string $creditDebitIndicator): void
+    {
+        $this->creditDebitIndicator = $creditDebitIndicator;
     }
 }

@@ -8,6 +8,18 @@ use Money\Money;
 
 class EntryTransactionDetail
 {
+    private int $groupIndex = 0;
+
+    public function getGroupIndex(): int
+    {
+        return $this->groupIndex;
+    }
+
+    public function setGroupIndex(int $groupIndex): void
+    {
+        $this->groupIndex = $groupIndex;
+    }
+
     private ?Reference $reference = null;
 
     /**

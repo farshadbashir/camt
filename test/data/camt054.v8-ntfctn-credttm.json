@@ -26,7 +26,7 @@
                 },
                 "getProprietary": null
             },
-            "getBatchPaymentId": null,
+            "getBatches": [],
             "getBookingDate": null,
             "getCharges": null,
             "getCreditDebitIndicator": "CRDT",
@@ -62,6 +62,7 @@
             "getReference": null,
             "getReversalIndicator": false,
             "getStatus": "INFO",
+            "getStatusType": "code",
             "getTransactionDetail": {
                 "__CLASS__": "Genkgo\\Camt\\DTO\\EntryTransactionDetail",
                 "getAdditionalTransactionInformation": null,
@@ -74,6 +75,7 @@
                 },
                 "getCharges": null,
                 "getCreditDebitIndicator": "CRDT",
+                "getGroupIndex": 0,
                 "getReference": {
                     "__CLASS__": "Genkgo\\Camt\\DTO\\Reference",
                     "getAccountOwnerTransactionId": null,

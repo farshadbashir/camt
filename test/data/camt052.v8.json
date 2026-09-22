@@ -26,7 +26,17 @@
                 },
                 "getProprietary": null
             },
-            "getBatchPaymentId": "FINP-0055-001",
+            "getBatches": [
+                {
+                    "__CLASS__": "Genkgo\\Camt\\DTO\\Batch",
+                    "getCreditDebitIndicator": null,
+                    "getGroupIndex": 0,
+                    "getMessageId": "FINP-0055",
+                    "getNumberOfTransactions": 20,
+                    "getPaymentInformationId": "FINP-0055-001",
+                    "getTotalAmount": null
+                }
+            ],
             "getBookingDate": {
                 "__CLASS__": "DateTimeImmutable",
                 "0": "2007-10-18T09:15:00+00:00"
@@ -69,6 +79,7 @@
             "getReference": null,
             "getReversalIndicator": false,
             "getStatus": "BOOK",
+            "getStatusType": "code",
             "getTransactionDetail": null,
             "getTransactionDetails": [],
             "getValueDate": {

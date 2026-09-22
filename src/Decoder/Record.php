@@ -151,19 +151,12 @@ class Record
                 $entry->setAccountServicerReference((string) $xmlEntry->AcctSvcrRef);
             }
 
-            if (isset($xmlEntry->NtryDtls->Btch->PmtInfId) && (string) $xmlEntry->NtryDtls->Btch->PmtInfId) {
-                $entry->setBatchPaymentId((string) $xmlEntry->NtryDtls->Btch->PmtInfId);
-            }
-
-            if (isset($xmlEntry->NtryDtls->TxDtls->Refs->PmtInfId) && (string) $xmlEntry->NtryDtls->TxDtls->Refs->PmtInfId) {
-                $entry->setBatchPaymentId((string) $xmlEntry->NtryDtls->TxDtls->Refs->PmtInfId);
-            }
-
             if (isset($xmlEntry->CdtDbtInd) && in_array((string) $xmlEntry->CdtDbtInd, ['CRDT', 'DBIT'], true)) {
                 $entry->setCreditDebitIndicator((string) $xmlEntry->CdtDbtInd);
             }
 
             $entry->setStatus($this->readStatus($xmlEntry));
+            $entry->setStatusType(isset($xmlEntry->Sts->Prtry) ? 'proprietary' : (isset($xmlEntry->Sts) ? 'code' : null));
 
             if (isset($xmlEntry->BkTxCd)) {
                 $bankTransactionCode = new DTO\BankTransactionCode();
@@ -210,6 +203,7 @@ class Record
                     /** @var SimpleXMLElement $chargesRecord */
                     foreach ($chargesRecords as $chargesRecord) {
                         $chargesDetail = new DTO\ChargesRecord();
+                        $chargesDetail->setCreditDebitIndicator(isset($chargesRecord->CdtDbtInd) ? (string) $chargesRecord->CdtDbtInd : null);
 
                         if (isset($chargesRecord->Amt)) {
                             $money = $this->moneyFactory->create($chargesRecord->Amt, $chargesRecord->CdtDbtInd);
@@ -239,11 +233,14 @@ class Record
     {
         $xmlStatus = $xmlEntry->Sts;
 
-        // CAMT v08 uses substructure, so we check for its existence or fallback to the element itself to keep compatibility with CAMT v04
-        return (string) $xmlStatus?->Cd
-            ?: (string) $xmlStatus?->Prtry
-                ?: (string) $xmlStatus
-                    ?: null;
+        if (isset($xmlStatus->Cd)) {
+            return (string) $xmlStatus->Cd;
+        }
+        if (isset($xmlStatus->Prtry)) {
+            return (string) $xmlStatus->Prtry;
+        }
+        // Earlier schemas use the ISO code directly, not a choice element.
+        return isset($xmlEntry->Sts) ? (string) $xmlStatus : null;
     }
 
     private function fromDateAndDateTimeChoice(SimpleXMLElement $xmlEntry): DateTimeImmutable

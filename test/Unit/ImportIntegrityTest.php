@@ -173,13 +173,13 @@ final class ImportIntegrityTest extends TestCase
         $this->read($xml);
     }
 
-    public function testMissingChargesIncludedRemainsFalse(): void
+    public function testMissingChargesIncludedRemainsUnknown(): void
     {
         $charges = '<Chrgs><Rcrd><Amt Ccy="EUR">0.005</Amt><CdtDbtInd>DBIT</CdtDbtInd></Rcrd></Chrgs>';
         $detail = str_replace('</TxDtls>', $charges.'</TxDtls>', self::detail('A', '10.00'));
         $entry = $this->first(self::entry('10.00', 'CRDT', 'false', $charges.'<NtryDtls>'.$detail.'</NtryDtls>'));
         foreach ([$entry->getCharges(), $entry->getTransactionDetail()->getCharges()] as $parsed) {
-            self::assertFalse($parsed->getRecords()[0]->getChargesIncludedIndicator());
+            self::assertNull($parsed->getRecords()[0]->getChargesIncludedIndicator());
             self::assertSame('-1', $parsed->getRecords()[0]->getAmount()->getAmount());
         }
     }

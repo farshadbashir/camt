@@ -30,7 +30,7 @@
                     "getIssuer": ""
                 }
             },
-            "getBatchPaymentId": null,
+            "getBatches": [],
             "getBookingDate": {
                 "__CLASS__": "DateTimeImmutable",
                 "0": "2007-10-18T00:00:00+00:00"
@@ -48,6 +48,7 @@
                         }
                     },
                     "getChargesIncludedIndicator": false,
+                    "getCreditDebitIndicator": "DBIT",
                     "getIdentification": "32"
                 },
                 "getRecords": [
@@ -122,6 +123,7 @@
             "getReference": null,
             "getReversalIndicator": false,
             "getStatus": "PDNG",
+            "getStatusType": "code",
             "getTransactionDetail": {
                 "__CLASS__": "Genkgo\\Camt\\DTO\\EntryTransactionDetail",
                 "getAdditionalTransactionInformation": null,
@@ -171,6 +173,7 @@
                             }
                         },
                         "getChargesIncludedIndicator": false,
+                        "getCreditDebitIndicator": "DBIT",
                         "getIdentification": "31"
                     },
                     "getRecords": [
@@ -186,6 +189,7 @@
                     }
                 },
                 "getCreditDebitIndicator": "CRDT",
+                "getGroupIndex": 0,
                 "getReference": {
                     "__CLASS__": "Genkgo\\Camt\\DTO\\Reference",
                     "getAccountOwnerTransactionId": null,

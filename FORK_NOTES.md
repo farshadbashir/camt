@@ -1,4 +1,4 @@
-# Fork changes in 2.10.3-p1
+# Fork changes in 2.10.3-p2
 
 This fork is based on genkgo/camt 2.10.3, commit
 `56e047d1599854ca34db0ccabce15230fcdd3f16`. The upstream MIT license,
@@ -28,6 +28,17 @@ reconciliation. Parser checks alone do not establish coverage of every bank
 export. Return-information APIs and nullable creation times require migration
 where used.
 
+## Status, batches and charge metadata
+
+- Distinguish ISO status codes from proprietary bank statuses, including `0`.
+- Replace the single batch-payment field with ordered Batch objects, preserving
+  group index, message/payment references, transaction count, optional amount
+  and direction. Keep individual detail references separate.
+- Keep absent charge inclusion, direction and identification nullable.
+
+Consumers must migrate removed batch-payment getters/setters to `getBatches()`
+and `addBatch()`, and handle unknown charge fields separately from false.
+
 ## Verification
 
 The complete parser test directory includes `test/Unit` and `test/Util`.
@@ -37,4 +48,4 @@ With the fork's development autoload and an appropriate PHPUnit runner:
 php vendor/bin/phpunit --no-configuration --bootstrap vendor/autoload.php --no-progress --colors=never --do-not-cache-result test
 ```
 
-Recorded parser verification: 182 tests / 1,167 assertions passed.
+Recorded parser verification: 187 tests / 1,209 assertions passed.
