@@ -28,6 +28,8 @@
             },
             "getBatches": [],
             "getBookingDate": null,
+            "getBookingDateKind": null,
+            "getBookingDateSource": null,
             "getCharges": null,
             "getCreditDebitIndicator": "CRDT",
             "getIndex": 0,
@@ -54,10 +56,12 @@
                     "__RECURSIVITY__"
                 ],
                 "getFromDate": null,
+                "getFromDateSource": null,
                 "getId": "250326012345678",
                 "getLegalSequenceNumber": null,
                 "getPagination": null,
-                "getToDate": null
+                "getToDate": null,
+                "getToDateSource": null
             },
             "getReference": null,
             "getReversalIndicator": false,
@@ -138,7 +142,9 @@
             "getValueDate": {
                 "__CLASS__": "DateTimeImmutable",
                 "0": "2025-03-25T00:00:00+00:00"
-            }
+            },
+            "getValueDateKind": "date",
+            "getValueDateSource": "2025-03-25"
         }
     ],
     "getGroupHeader": {

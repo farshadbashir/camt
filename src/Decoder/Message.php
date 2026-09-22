@@ -68,8 +68,10 @@ abstract class Message
             $record->setLegalSequenceNumber((string) $xmlRecord->LglSeqNb);
         }
         if (isset($xmlRecord->FrToDt)) {
-            $record->setFromDate($this->dateDecoder->decode((string) $xmlRecord->FrToDt->FrDtTm));
-            $record->setToDate($this->dateDecoder->decode((string) $xmlRecord->FrToDt->ToDtTm));
+            $fromSource = (string) $xmlRecord->FrToDt->FrDtTm;
+            $toSource = (string) $xmlRecord->FrToDt->ToDtTm;
+            $record->setFromDate($this->dateDecoder->decode($fromSource), $fromSource);
+            $record->setToDate($this->dateDecoder->decode($toSource), $toSource);
         }
     }
 

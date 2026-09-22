@@ -24,6 +24,10 @@ abstract class Record
 
     protected ?DateTimeImmutable $toDate = null;
 
+    protected ?string $fromDateSource = null;
+
+    protected ?string $toDateSource = null;
+
     /**
      * @var Entry[]
      */
@@ -92,9 +96,16 @@ abstract class Record
         return $this->fromDate;
     }
 
-    public function setFromDate(DateTimeImmutable $fromDate): void
+    public function setFromDate(DateTimeImmutable $fromDate, ?string $source = null): void
     {
         $this->fromDate = $fromDate;
+        $this->fromDateSource = $source;
+    }
+
+    /** Original FrDtTm XML text, preserving precision and timezone presence. */
+    public function getFromDateSource(): ?string
+    {
+        return $this->fromDateSource;
     }
 
     public function getToDate(): ?DateTimeImmutable
@@ -102,9 +113,16 @@ abstract class Record
         return $this->toDate;
     }
 
-    public function setToDate(DateTimeImmutable $toDate): void
+    public function setToDate(DateTimeImmutable $toDate, ?string $source = null): void
     {
         $this->toDate = $toDate;
+        $this->toDateSource = $source;
+    }
+
+    /** Original ToDtTm XML text; never inferred from the DateTime projection. */
+    public function getToDateSource(): ?string
+    {
+        return $this->toDateSource;
     }
 
     public function addEntry(Entry $entry): void

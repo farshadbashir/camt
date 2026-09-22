@@ -1,6 +1,6 @@
 {
     "name": "genkgo/camt",
-    "version": "2.10.3-p2",
+    "version": "2.10.3-p3",
     "description": "Library to read CAMT files (XML containing bank statements).",
     "license": "MIT",
     "scripts": {

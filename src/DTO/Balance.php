@@ -33,16 +33,34 @@ class Balance
 
     private DateTimeImmutable $date;
 
-    private function __construct(string $type, Money $amount, DateTimeImmutable $date)
+    private ?string $dateKind = null;
+
+    private ?string $dateSource = null;
+
+    private function __construct(string $type, Money $amount, DateTimeImmutable $date, ?string $dateKind = null, ?string $dateSource = null)
     {
         $this->type = $type;
         $this->amount = $amount;
         $this->date = $date;
+        $this->dateKind = $dateKind;
+        $this->dateSource = $dateSource;
     }
 
     public function getDate(): DateTimeImmutable
     {
         return $this->date;
+    }
+
+    /** The XML choice: date (Dt), datetime (DtTm), or unknown for a legacy DTO. */
+    public function getDateKind(): ?string
+    {
+        return $this->dateKind;
+    }
+
+    /** Original XML text, without inferred timezone or loss of fractional digits. */
+    public function getDateSource(): ?string
+    {
+        return $this->dateSource;
     }
 
     public function getAmount(): Money
@@ -55,48 +73,48 @@ class Balance
         return $this->type;
     }
 
-    public static function opening(Money $amount, DateTimeImmutable $date): self
+    public static function opening(Money $amount, DateTimeImmutable $date, ?string $dateKind = null, ?string $dateSource = null): self
     {
-        return new self(self::TYPE_OPENING, $amount, $date);
+        return new self(self::TYPE_OPENING, $amount, $date, $dateKind, $dateSource);
     }
 
-    public static function openingAvailable(Money $amount, DateTimeImmutable $date): self
+    public static function openingAvailable(Money $amount, DateTimeImmutable $date, ?string $dateKind = null, ?string $dateSource = null): self
     {
-        return new self(self::TYPE_OPENING_AVAILABLE, $amount, $date);
+        return new self(self::TYPE_OPENING_AVAILABLE, $amount, $date, $dateKind, $dateSource);
     }
 
-    public static function closing(Money $amount, DateTimeImmutable $date): self
+    public static function closing(Money $amount, DateTimeImmutable $date, ?string $dateKind = null, ?string $dateSource = null): self
     {
-        return new self(self::TYPE_CLOSING, $amount, $date);
+        return new self(self::TYPE_CLOSING, $amount, $date, $dateKind, $dateSource);
     }
 
-    public static function closingAvailable(Money $amount, DateTimeImmutable $date): self
+    public static function closingAvailable(Money $amount, DateTimeImmutable $date, ?string $dateKind = null, ?string $dateSource = null): self
     {
-        return new self(self::TYPE_CLOSING_AVAILABLE, $amount, $date);
+        return new self(self::TYPE_CLOSING_AVAILABLE, $amount, $date, $dateKind, $dateSource);
     }
 
-    public static function forwardAvailable(Money $amount, DateTimeImmutable $date): self
+    public static function forwardAvailable(Money $amount, DateTimeImmutable $date, ?string $dateKind = null, ?string $dateSource = null): self
     {
-        return new self(self::TYPE_FORWARD_AVAILABLE, $amount, $date);
+        return new self(self::TYPE_FORWARD_AVAILABLE, $amount, $date, $dateKind, $dateSource);
     }
 
-    public static function information(Money $amount, DateTimeImmutable $date): self
+    public static function information(Money $amount, DateTimeImmutable $date, ?string $dateKind = null, ?string $dateSource = null): self
     {
-        return new self(self::TYPE_INFORMATION, $amount, $date);
+        return new self(self::TYPE_INFORMATION, $amount, $date, $dateKind, $dateSource);
     }
 
-    public static function interim(Money $amount, DateTimeImmutable $date): self
+    public static function interim(Money $amount, DateTimeImmutable $date, ?string $dateKind = null, ?string $dateSource = null): self
     {
-        return new self(self::TYPE_INTERIM, $amount, $date);
+        return new self(self::TYPE_INTERIM, $amount, $date, $dateKind, $dateSource);
     }
 
-    public static function interimAvailable(Money $amount, DateTimeImmutable $date): self
+    public static function interimAvailable(Money $amount, DateTimeImmutable $date, ?string $dateKind = null, ?string $dateSource = null): self
     {
-        return new self(self::TYPE_INTERIM_AVAILABLE, $amount, $date);
+        return new self(self::TYPE_INTERIM_AVAILABLE, $amount, $date, $dateKind, $dateSource);
     }
 
-    public static function expectedCredit(Money $amount, DateTimeImmutable $date): self
+    public static function expectedCredit(Money $amount, DateTimeImmutable $date, ?string $dateKind = null, ?string $dateSource = null): self
     {
-        return new self(self::TYPE_EXPECTED_CREDIT, $amount, $date);
+        return new self(self::TYPE_EXPECTED_CREDIT, $amount, $date, $dateKind, $dateSource);
     }
 }

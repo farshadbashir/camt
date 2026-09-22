@@ -17,6 +17,14 @@ class Entry
 
     private ?DateTimeImmutable $valueDate = null;
 
+    private ?string $bookingDateKind = null;
+
+    private ?string $bookingDateSource = null;
+
+    private ?string $valueDateKind = null;
+
+    private ?string $valueDateSource = null;
+
     /**
      * @var EntryTransactionDetail[]
      */
@@ -70,6 +78,28 @@ class Entry
     public function getValueDate(): ?DateTimeImmutable
     {
         return $this->valueDate;
+    }
+
+    /** The XML choice: date (Dt), datetime (DtTm), or unknown. */
+    public function getBookingDateKind(): ?string
+    {
+        return $this->bookingDateKind;
+    }
+
+    /** Original XML text; DateTimeImmutable is only a potentially lossy projection. */
+    public function getBookingDateSource(): ?string
+    {
+        return $this->bookingDateSource;
+    }
+
+    public function getValueDateKind(): ?string
+    {
+        return $this->valueDateKind;
+    }
+
+    public function getValueDateSource(): ?string
+    {
+        return $this->valueDateSource;
     }
 
     public function addTransactionDetail(EntryTransactionDetail $detail): void
@@ -173,14 +203,18 @@ class Entry
         $this->charges = $charges;
     }
 
-    public function setBookingDate(?DateTimeImmutable $date): void
+    public function setBookingDate(?DateTimeImmutable $date, ?string $dateKind = null, ?string $dateSource = null): void
     {
         $this->bookingDate = $date;
+        $this->bookingDateKind = $date === null ? null : $dateKind;
+        $this->bookingDateSource = $date === null ? null : $dateSource;
     }
 
-    public function setValueDate(?DateTimeImmutable $date): void
+    public function setValueDate(?DateTimeImmutable $date, ?string $dateKind = null, ?string $dateSource = null): void
     {
         $this->valueDate = $date;
+        $this->valueDateKind = $date === null ? null : $dateKind;
+        $this->valueDateSource = $date === null ? null : $dateSource;
     }
 
     public function getStatus(): ?string

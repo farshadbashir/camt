@@ -1,4 +1,4 @@
-# Fork changes in 2.10.3-p2
+# Fork changes in 2.10.3-p3
 
 This fork is based on genkgo/camt 2.10.3, commit
 `56e047d1599854ca34db0ccabce15230fcdd3f16`. The upstream MIT license,
@@ -39,6 +39,19 @@ where used.
 Consumers must migrate removed batch-payment getters/setters to `getBatches()`
 and `addBatch()`, and handle unknown charge fields separately from false.
 
+## Source dates
+
+- Keep date-only `Dt` distinct from date/time `DtTm` on balances and entry dates.
+- Preserve parsed XML date text, including fractional digits, trailing zeroes,
+  timezone spelling and absence of a timezone.
+- Expose balance date kind/source, booking and value date kind/source, and
+  period from/to source getters alongside existing DateTimeImmutable getters.
+- Clear stale source metadata when dates are replaced without metadata or removed.
+
+Source text is the parsed XML value, not the original file bytes. Existing
+DateTime getters and the configured date decoder remain available. Creation,
+acceptance and birth dates have no new source metadata.
+
 ## Verification
 
 The complete parser test directory includes `test/Unit` and `test/Util`.
@@ -48,4 +61,4 @@ With the fork's development autoload and an appropriate PHPUnit runner:
 php vendor/bin/phpunit --no-configuration --bootstrap vendor/autoload.php --no-progress --colors=never --do-not-cache-result test
 ```
 
-Recorded parser verification: 187 tests / 1,209 assertions passed.
+Recorded parser verification: 272 tests / 2,013 assertions passed.

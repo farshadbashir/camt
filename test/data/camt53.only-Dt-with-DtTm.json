@@ -41,6 +41,8 @@
                         "__CLASS__": "DateTimeImmutable",
                         "0": "2025-07-23T00:00:00+00:00"
                     },
+                    "getDateKind": "datetime",
+                    "getDateSource": "2025-07-23T00:00:00.000000000",
                     "getType": "opening"
                 }
             ],
@@ -52,10 +54,12 @@
             "getElectronicSequenceNumber": null,
             "getEntries": [],
             "getFromDate": null,
+            "getFromDateSource": null,
             "getId": "I38y0h4YyLnQiOV6P7nEd44r2",
             "getLegalSequenceNumber": null,
             "getPagination": null,
-            "getToDate": null
+            "getToDate": null,
+            "getToDateSource": null
         }
     ]
 }

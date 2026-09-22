@@ -35,6 +35,8 @@
                 "__CLASS__": "DateTimeImmutable",
                 "0": "2007-10-18T00:00:00+00:00"
             },
+            "getBookingDateKind": "date",
+            "getBookingDateSource": "2007-10-18",
             "getCharges": {
                 "__CLASS__": "Genkgo\\Camt\\DTO\\Charges",
                 "getRecord": {
@@ -93,6 +95,8 @@
                             "__CLASS__": "DateTimeImmutable",
                             "0": "2020-04-04T00:00:00+00:00"
                         },
+                        "getDateKind": "date",
+                        "getDateSource": "2020-04-04",
                         "getType": "interim"
                     }
                 ],
@@ -109,6 +113,7 @@
                     "__CLASS__": "DateTimeImmutable",
                     "0": "2007-10-18T07:00:00+00:00"
                 },
+                "getFromDateSource": "2007-10-18T08:00:00+01:00",
                 "getId": "AAAASESS-FP-ACCR001",
                 "getLegalSequenceNumber": "12312",
                 "getPagination": {
@@ -118,7 +123,8 @@
                 "getToDate": {
                     "__CLASS__": "DateTimeImmutable",
                     "0": "2007-10-18T11:30:00+00:00"
-                }
+                },
+                "getToDateSource": "2007-10-18T12:30:00+01:00"
             },
             "getReference": null,
             "getReversalIndicator": false,
@@ -302,7 +308,9 @@
             "getValueDate": {
                 "__CLASS__": "DateTimeImmutable",
                 "0": "2007-10-18T00:00:00+00:00"
-            }
+            },
+            "getValueDateKind": "date",
+            "getValueDateSource": "2007-10-18"
         }
     ],
     "getGroupHeader": {

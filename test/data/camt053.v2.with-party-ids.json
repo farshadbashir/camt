@@ -27,6 +27,8 @@
                 "__CLASS__": "DateTimeImmutable",
                 "0": "2014-12-31T00:00:00+00:00"
             },
+            "getBookingDateKind": "date",
+            "getBookingDateSource": "2014-12-31",
             "getCharges": null,
             "getCreditDebitIndicator": "CRDT",
             "getIndex": 0,
@@ -58,6 +60,8 @@
                             "__CLASS__": "DateTimeImmutable",
                             "0": "2014-12-30T00:00:00+00:00"
                         },
+                        "getDateKind": "date",
+                        "getDateSource": "2014-12-30",
                         "getType": "opening"
                     },
                     {
@@ -74,6 +78,8 @@
                             "__CLASS__": "DateTimeImmutable",
                             "0": "2014-12-31T00:00:00+00:00"
                         },
+                        "getDateKind": "date",
+                        "getDateSource": "2014-12-31",
                         "getType": "closing"
                     },
                     {
@@ -90,6 +96,8 @@
                             "__CLASS__": "DateTimeImmutable",
                             "0": "2014-12-30T00:00:00+00:00"
                         },
+                        "getDateKind": "date",
+                        "getDateSource": "2014-12-30",
                         "getType": "opening_available"
                     },
                     {
@@ -106,6 +114,8 @@
                             "__CLASS__": "DateTimeImmutable",
                             "0": "2014-12-31T00:00:00+00:00"
                         },
+                        "getDateKind": "date",
+                        "getDateSource": "2014-12-31",
                         "getType": "closing_available"
                     }
                 ],
@@ -122,13 +132,15 @@
                     "__CLASS__": "DateTimeImmutable",
                     "0": "2007-10-18T07:00:00+00:00"
                 },
+                "getFromDateSource": "2007-10-18T08:00:00+01:00",
                 "getId": "253EURNL26VAYB8060476890",
                 "getLegalSequenceNumber": "12312",
                 "getPagination": null,
                 "getToDate": {
                     "__CLASS__": "DateTimeImmutable",
                     "0": "2007-10-18T11:30:00+00:00"
-                }
+                },
+                "getToDateSource": "2007-10-18T12:30:00+01:00"
             },
             "getReference": null,
             "getReversalIndicator": false,
@@ -301,7 +313,9 @@
             "getValueDate": {
                 "__CLASS__": "DateTimeImmutable",
                 "0": "2015-01-02T00:00:00+00:00"
-            }
+            },
+            "getValueDateKind": "date",
+            "getValueDateSource": "2015-01-02"
         }
     ],
     "getGroupHeader": {

@@ -46,56 +46,56 @@ class Record
                 case 'PRCD':
                     $record->addBalance(DTO\Balance::opening(
                         $money,
-                        $date
+                        ...$date
                     ));
 
                     break;
                 case 'OPAV':
                     $record->addBalance(DTO\Balance::openingAvailable(
                         $money,
-                        $date
+                        ...$date
                     ));
 
                     break;
                 case 'CLBD':
                     $record->addBalance(DTO\Balance::closing(
                         $money,
-                        $date
+                        ...$date
                     ));
 
                     break;
                 case 'CLAV':
                     $record->addBalance(DTO\Balance::closingAvailable(
                         $money,
-                        $date
+                        ...$date
                     ));
 
                     break;
                 case 'FWAV':
                     $record->addBalance(DTO\Balance::forwardAvailable(
                         $money,
-                        $date
+                        ...$date
                     ));
 
                     break;
                 case 'INFO':
                     $record->addBalance(DTO\Balance::information(
                         $money,
-                        $date
+                        ...$date
                     ));
 
                     break;
                 case 'ITAV':
                     $record->addBalance(DTO\Balance::interimAvailable(
                         $money,
-                        $date
+                        ...$date
                     ));
 
                     break;
                 case 'ITBD':
                     $record->addBalance(DTO\Balance::interim(
                         $money,
-                        $date
+                        ...$date
                     ));
 
                     break;
@@ -103,7 +103,7 @@ class Record
                 case 'XPCD':
                     $record->addBalance(DTO\Balance::expectedCredit(
                         $money,
-                        $date
+                        ...$date
                     ));
 
                     break;
@@ -130,11 +130,11 @@ class Record
             );
 
             if ($bookingDate) {
-                $entry->setBookingDate($this->fromDateAndDateTimeChoice($bookingDate));
+                $entry->setBookingDate(...$this->fromDateAndDateTimeChoice($bookingDate));
             }
 
             if ($valueDate) {
-                $entry->setValueDate($this->fromDateAndDateTimeChoice($valueDate));
+                $entry->setValueDate(...$this->fromDateAndDateTimeChoice($valueDate));
             }
 
             $entry->setAdditionalInfo($additionalInfo);
@@ -243,10 +243,12 @@ class Record
         return isset($xmlEntry->Sts) ? (string) $xmlStatus : null;
     }
 
-    private function fromDateAndDateTimeChoice(SimpleXMLElement $xmlEntry): DateTimeImmutable
+    /** @return array{DateTimeImmutable, string, string} */
+    private function fromDateAndDateTimeChoice(SimpleXMLElement $xmlEntry): array
     {
         $date = ((string) $xmlEntry->Dt) ?: (string) $xmlEntry->DtTm;
+        $kind = ((string) $xmlEntry->Dt) ? 'date' : 'datetime';
 
-        return $this->dateDecoder->decode($date);
+        return [$this->dateDecoder->decode($date), $kind, $date];
     }
 }

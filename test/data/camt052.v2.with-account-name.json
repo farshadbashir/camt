@@ -20,6 +20,8 @@
             },
             "getBatches": [],
             "getBookingDate": null,
+            "getBookingDateKind": null,
+            "getBookingDateSource": null,
             "getCharges": null,
             "getCreditDebitIndicator": "DBIT",
             "getIndex": 0,
@@ -47,10 +49,12 @@
                     "__RECURSIVITY__"
                 ],
                 "getFromDate": null,
+                "getFromDateSource": null,
                 "getId": "AAAASESS-FP-ACCR001",
                 "getLegalSequenceNumber": null,
                 "getPagination": null,
-                "getToDate": null
+                "getToDate": null,
+                "getToDateSource": null
             },
             "getReference": null,
             "getReversalIndicator": false,
@@ -120,7 +124,9 @@
             "getTransactionDetails": [
                 "__RECURSIVITY__"
             ],
-            "getValueDate": null
+            "getValueDate": null,
+            "getValueDateKind": null,
+            "getValueDateSource": null
         }
     ],
     "getGroupHeader": {
