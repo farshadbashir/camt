@@ -1,10 +1,59 @@
-# Genkgo.CAMT
+# Genkgo.CAMT fork by Farshad Bashir
 
-[![Build Status](https://github.com/genkgo/camt/workflows/main/badge.svg)](https://github.com/genkgo/camt/actions)
-[![Code Coverage](https://codecov.io/gh/genkgo/camt/branch/main/graph/badge.svg)](https://codecov.io/gh/genkgo/camt)
-[![Total Downloads](https://poser.pugx.org/genkgo/camt/downloads.png)](https://packagist.org/packages/genkgo/camt)
-[![Latest Stable Version](https://poser.pugx.org/genkgo/camt/v/stable.png)](https://packagist.org/packages/genkgo/camt)
-[![License](https://poser.pugx.org/genkgo/camt/license.png)](https://packagist.org/packages/genkgo/camt)
+## Over deze fork
+
+Deze repository bevat de door Farshad Bashir onderhouden fork van
+[genkgo/camt](https://github.com/genkgo/camt), gebaseerd op versie **2.10.3**
+(commit [`56e047d`](https://github.com/genkgo/camt/commit/56e047d1599854ca34db0ccabce15230fcdd3f16)).
+De aangepaste parserversie is **2.10.3-p3**. De wijzigingen zijn gemaakt voor
+betrouwbaar inlezen en aansluiten van bankafschriften in een boekhoudapplicatie.
+De oorspronkelijke MIT-licentie blijft behouden.
+
+Ten opzichte van dat uitgangspunt zijn de volgende onderdelen gewijzigd:
+
+| Onderdeel | Aanpassing in deze fork |
+|---|---|
+| Bedragen | Debetbedragen worden zonder omzetting naar een floating-pointgetal verwerkt. Bestaande MoneyPHP-afronding blijft behouden; geldige bedragen met een voorloopplus of XML-witruimte worden ondersteund. |
+| Transactiedetails | Alle herhaalde detailgroepen worden in bronvolgorde ingelezen. Een expliciete debet-/creditrichting op een detail wordt gerespecteerd. |
+| Status en batches | ISO-status en eigen bankstatus blijven onderscheiden. Batchgegevens worden per groep bewaard, los van individuele betalingsreferenties. |
+| Kosten en booleans | Kosteninclusie komt uit het juiste XML-veld. `true`, `false`, `1` en `0` worden gelezen; ontbrekende kosteninclusie, richting en identificatie blijven onbekend (`null`). |
+| Rekeningvaluta en retouren | Rekeningvaluta blijft afzonderlijk beschikbaar. Retourgegevens behouden ISO-redenen, eigen bankredenen en alle aanvullende toelichtingen. |
+| Datums en tijdstippen | Datum en datum/tijd blijven onderscheiden. De oorspronkelijke XML-tekst bewaart fractieprecisie en tijdzonevermelding, naast de bestaande datumobjecten. Een ontbrekend optioneel aanmaaktijdstip van een .053.001.08-afschrift blijft `null`. |
+| XML-inlezing | Namespaceherkenning werkt ook met prefixes. DTD en XInclude worden geweigerd; de eigen XML-inleesroute gebruikt netwerkbeperking en algemene parse-/schemafouten. |
+
+De volledige parsersuite is lokaal opnieuw gecontroleerd op **4 oktober 2026**:
+**272 tests en 2.013 assertions geslaagd**. De ondersteunde schema's en
+dependencyvereisten zijn ongewijzigd. Er zijn wel gewijzigde API's, onder andere
+voor batches, retourgegevens en nullable velden.
+
+Zie [FORK_NOTES.md](FORK_NOTES.md) voor de precieze verschillen, migratiepunten,
+wijzigingscommits en testgrenzen. De
+[volledige vergelijking](https://github.com/farshadbashir/camt/compare/56e047d1599854ca34db0ccabce15230fcdd3f16...3ee652f0d7a89f8a6209acdca12d8e6fb1ead9f2)
+toont de drie parsercommits.
+
+## About this fork
+
+Farshad Bashir maintains this fork of [genkgo/camt](https://github.com/genkgo/camt)
+from upstream **2.10.3**, commit `56e047d1599854ca34db0ccabce15230fcdd3f16`.
+The modified parser version is **2.10.3-p3**, developed for reliable bank-statement
+imports and reconciliation in an accounting application. The MIT license is retained.
+
+Compared with that baseline, it removes floating-point debit conversion, reads
+all detail groups in source order, honors explicit detail directions, separates
+ISO and proprietary statuses, preserves grouped batch references, corrects charge
+flags and XML booleans, retains account currency and return information, and
+adds source date kinds and exact date text. An absent optional .053.001.08
+statement creation time remains `null`. XML reading handles namespace prefixes,
+rejects DTD/XInclude, restricts network access on its own parsing path, and uses
+generic parse/schema errors.
+
+The full parser suite passed locally on **4 October 2026**: **272 tests / 2,013
+assertions**. Supported schemas and dependency requirements are unchanged. Batch,
+return-information and nullable-field APIs require migration where used; read
+[FORK_NOTES.md](FORK_NOTES.md) for the detailed comparison, compatibility notes,
+commits and verification limits.
+
+## Library overview
 
 Library to read CAMT files. Currently only CAMT.052, CAMT.053 and CAMT.054 are supported.
 
@@ -54,11 +103,14 @@ Library to read CAMT files. Currently only CAMT.052, CAMT.053 and CAMT.054 are s
 
 ### Installation
 
-It is installable and autoloadable via Composer:
+The upstream package is available through Composer/Packagist:
 
 ```sh
 composer require genkgo/camt
 ```
+
+To select this fork, pin its reviewed source revision or immutable runtime
+artifact as described in [FORK_NOTES.md](FORK_NOTES.md#distribution).
 
 ## Getting Started
 
